@@ -1,0 +1,10 @@
+# Ignore idea files
+.idea/
+# Ignore vs code files
+.vscode/
+# Ignore misc files
+.DS_Store
+.byebug_history
+
+# Ignore test reports
+/reports/
