@@ -4,6 +4,7 @@ source 'https://rubygems.org' do
   gem 'capybara'
   gem 'capybara-screenshot'
   gem 'colorize'
+  gem 'dotenv'
   gem 'faker'
   gem 'postgresql'
   gem 'pry'
@@ -12,6 +13,7 @@ source 'https://rubygems.org' do
   gem 'rspec_html_reporter'
   gem 'rubocop'
   gem 'selenium-webdriver'
+
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'webdrivers', '~> 4.0'
 end
