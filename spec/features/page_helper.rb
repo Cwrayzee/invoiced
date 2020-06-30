@@ -13,6 +13,14 @@ module PagesHelper
     LoginPage.new
   end
 
+  def sso_page
+    SsoPage.new
+  end
+
+  def dashboard_page
+    DashboardPage.new
+  end
+
   # ***************************** PageHelper methods  *****************************
   # generic methods across the app, not defined to a single page
 
@@ -63,6 +71,14 @@ module PagesHelper
 
   def refresh_browser
     visit(current_url)
+  end
+
+  def console_check
+    console_logs = page.driver.browser.manage.logs.get(:browser)
+    unless console_logs.empty?
+      errors = console_logs.select { |error| error.level == "SEVERE" && !error.message.empty? }
+      errors&.each { |error| raise JavaScriptConsoleError, error.message }
+    end
   end
 
 

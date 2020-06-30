@@ -6,10 +6,9 @@ require 'pg'
 require 'pry-byebug'
 require 'rspec'
 require 'selenium-webdriver'
-require 'watir'
 require 'yaml'
 
-require 'features/pages_helper.rb'
+require 'features/page_helper'
 require 'capybara_config'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
@@ -38,18 +37,32 @@ RSpec.configure do |config|
   end
   config.filter_run_when_matching :focus
 
+  # take screenshot on failure and attach to the report
+  config.after(:each, [ type: :feature, js: true ]) do |example|
+    if example.exception
+      example.metadata[:screenshots] = []
+      screenshot_name = ("screenshot-#{example.metadata[:testrail_id]}-#{Time.now.strftime('%Y%m%d-%H%M%S')}.png").gsub("\n", "")
+      report_screenshot_path = RspecHtmlReporter::SCREENSHOT_DIR
+      File.new(save_screenshot("#{report_screenshot_path}/#{screenshot_name}"))
+      example.metadata[:screenshots] << {
+          caption: example.exception.message,
+          path: "./screenshots/#{screenshot_name}"
+      }
+    end
+  end
+
 
   # Print console errors after (type: :feature)
   # FAIL on SEVERE and raise JavaScriptConsoleError
   # https://intellipaat.com/community/16534/is-there-a-way-to-print-javascript-console-errors-to-the-terminal-with-rspec-capybara-selenium
   # OTHER OPTION to show warnings (opted for previous) - https://medium.com/@coorasse/catch-javascript-errors-in-your-system-tests-89c2fe6773b1
-  config.after(:each, type: :feature, js: true) do
-    console_logs = page.driver.browser.manage.logs.get(:browser)
-    unless console_logs.empty?
-      errors = console_logs.select { |error| error.level == "SEVERE" && !error.message.empty? }
-      errors&.each { |error| raise JavaScriptConsoleError, error.message }
-    end
-  end
+  # config.after(:each, type: :feature, js: true) do
+  #   console_logs = page.driver.browser.manage.logs.get(:browser)
+  #   unless console_logs.empty?
+  #     errors = console_logs.select { |error| error.level == "SEVERE" && !error.message.empty? }
+  #     errors&.each { |error| raise JavaScriptConsoleError, error.message }
+  #   end
+  # end
 
   # persist the browser between examples if the test has the persist: true tag
   config.after(:each, type: :feature, js: true, persist: true) do
