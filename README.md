@@ -9,5 +9,6 @@ NOTE: Project is created with:
   1. Ensure that Ruby 2.7.1 is installed
   2. clone repo to local directory
   3. cd to directory
-  4. run `bundle install` to install dependencies
-  5. kick off test by running `bundle exec rspec`
+  4. install bundler `gem install bundler`
+  5. run `bundle install` to install dependencies
+  6. kick off test by running `bundle exec rspec`
