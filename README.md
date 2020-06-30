@@ -12,3 +12,8 @@ NOTE: Project is created with:
   4. install bundler `gem install bundler`
   5. run `bundle install` to install dependencies
   6. kick off test by running `bundle exec rspec`
+
+NOTE: The tests can be run 'headlessly' by feeding the 
+`DRIVER=headless` argument when calling the test:
+
+run `DRIVER=headless bundle exec rspec`

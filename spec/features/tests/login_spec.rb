@@ -46,7 +46,7 @@ describe 'Login to Invoiced demo app', type: :feature, js: true do
     end
 
     it 'temporarily locks the user out after too many invalid attempts' do
-      3.times do
+      4.times do
         visit '/login'
         expect(login_page.login_page_reached?).to be_truthy
         login_page.login_user(@username, 'badPassword')
