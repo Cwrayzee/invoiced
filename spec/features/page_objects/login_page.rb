@@ -44,8 +44,8 @@ class LoginPage
   end
 
   def login_user(username, password)
-    find(EMAIL_FIELD).set username unless find(EMAIL_FIELD).value == username
-    find(PASSWORD_FIELD).set password unless find(PASSWORD_FIELD).value == password
+    find(EMAIL_FIELD).set username
+    find(PASSWORD_FIELD).set password
     find(SIGN_IN_BTN).click
   end
 end

@@ -3,7 +3,7 @@ describe 'Login to Invoiced demo app', type: :feature, js: true do
   include PagesHelper
 
   before :all do
-    creds = YAML.load_file('spec/test_data/login_data.yml')
+    creds = YAML.load_file('spec/features/test_data/login_data.yml')
     @username = creds['username']
     @password = creds['password']
   end
@@ -12,18 +12,20 @@ describe 'Login to Invoiced demo app', type: :feature, js: true do
     visit '/login'
   end
 
-  it 'can open the login page' do
-    expect(login_page.login_page_reached?).to be_truthy
-  end
+  context 'Page validations' do
+    it 'can open the login page' do
+      expect(login_page.login_page_reached?).to be_truthy
+    end
 
-  it 'validates the login form on the login page' do
-    expect(login_page.validate_login_form_elements).to be_truthy
+    it 'validates the login form on the login page' do
+      expect(login_page.validate_login_form_elements).to be_truthy
+    end
   end
 
   context "Valid login data" do
     it 'allows user to login with valid username and password' do
       login_page.login_user(@username, @password)
-      while page.has_css?('.pg-loading')
+      while page.has_css?('.pg-loading') # page loader
         sleep 0.1
       end
       expect(current_url).to eq('https://dashboard.invoiced.com/dashboard')
@@ -45,9 +47,11 @@ describe 'Login to Invoiced demo app', type: :feature, js: true do
 
     it 'temporarily locks the user out after too many invalid attempts' do
       3.times do
+        visit '/login'
+        expect(login_page.login_page_reached?).to be_truthy
         login_page.login_user(@username, 'badPassword')
-        refresh_browser
       end
+
       lockout_message = "This account has been locked due to too many failed sign in attempts."
       expect(login_page.invalid_login_alert_message).to include(lockout_message)
     end

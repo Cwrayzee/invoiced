@@ -5,6 +5,7 @@ require 'faker'
 require 'pg'
 require 'pry-byebug'
 require 'rspec'
+# require 'rspec-rails'
 require 'selenium-webdriver'
 require 'yaml'
 
