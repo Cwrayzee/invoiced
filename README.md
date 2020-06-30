@@ -3,6 +3,7 @@ Sample login tests for Invoiced
 
 NOTE: Project is created with:
  * Ruby 2.7.1
+ * Capybara/Selenium
 
 ## To run tests:
   1. Ensure that Ruby 2.7.1 is installed
