@@ -6,7 +6,6 @@ source 'https://rubygems.org' do
   gem 'colorize'
   gem 'dotenv'
   gem 'faker'
-  gem 'postgresql'
   gem 'pry'
   gem 'pry-byebug'
   # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
