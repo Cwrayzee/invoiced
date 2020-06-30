@@ -22,7 +22,7 @@ describe 'Login to Invoiced demo app', type: :feature, js: true do
     end
   end
 
-  context "Valid login data" do
+  context "with valid login data" do
     it 'allows user to login with valid username and password' do
       login_page.login_user(@username, @password)
       while page.has_css?('.pg-loading') # page loader
@@ -32,7 +32,7 @@ describe 'Login to Invoiced demo app', type: :feature, js: true do
     end
   end
 
-  context 'Invalid Login data' do
+  context 'with invalid Login data' do
     it 'shows invalid message and console error with bad email' do
       login_page.login_user('bad_email@example.com', @password)
       expect(login_page.invalid_login_alert_message).to eq("We could not find a match for that email address and password.")
