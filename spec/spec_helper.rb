@@ -2,7 +2,6 @@
 require 'capybara/rspec'
 require 'date'
 require 'faker'
-require 'pg'
 require 'pry-byebug'
 require 'rspec'
 # require 'rspec-rails'
