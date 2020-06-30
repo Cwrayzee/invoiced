@@ -8,6 +8,7 @@ require 'rspec'
 # require 'rspec-rails'
 require 'selenium-webdriver'
 require 'yaml'
+require 'webdrivers/chromedriver'
 
 require 'features/page_helper'
 require 'capybara_config'
